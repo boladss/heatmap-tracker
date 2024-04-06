@@ -5,9 +5,10 @@
   /* text-align: center; */
 
   --box-size: 10pt;
-  --box-gap: 1pt;
+  --box-gap: 1.2pt;
   --box-color: green;
-  --border-color: hsla(0,0,0,0.5);
+  --box-default-color: hsl(0, 0%, 90%);
+  --border-color: hsla(0, 0%, 0%, 10%);
 }
 
 .box {
@@ -16,7 +17,7 @@
   width: var(--box-size);
   border: 1pt solid var(--border-color);
   border-radius: 3pt;
-  background-color: var(--box-color);
+  /* background-color: var(--box-color); */
   margin: var(--box-gap);
 }
 
@@ -34,4 +35,5 @@
 .heatmap-wrapper {
   display: flex;
   justify-content: center;
+  margin: 2rem;
 }
