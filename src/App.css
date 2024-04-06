@@ -2,5 +2,36 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  /* text-align: center; */
+
+  --box-size: 10pt;
+  --box-gap: 1pt;
+  --box-color: green;
+  --border-color: hsla(0,0,0,0.5);
+}
+
+.box {
+  font-size: 10;
+  height: var(--box-size);
+  width: var(--box-size);
+  border: 1pt solid var(--border-color);
+  border-radius: 3pt;
+  background-color: var(--box-color);
+  margin: var(--box-gap);
+}
+
+.heatmap-container {
+  display: flex;
+  float: left;
+  flex-direction: column;
+  flex-wrap: wrap;
+  column-gap: 0;
+  row-gap: 0;
+  max-height: calc(7*(var(--box-size) + 2*var(--box-gap)));
+  min-width: calc(53*(var(--box-size) + 2*var(--box-gap)));
+}
+
+.heatmap-wrapper {
+  display: flex;
+  justify-content: center;
 }
