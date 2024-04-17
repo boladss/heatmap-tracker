@@ -12,7 +12,7 @@ function Day({ index, input, max, selected, selectIndex }: { index: number, inpu
   const boxColor = opacity ? { backgroundColor: `hsl(120, 100%, 25.1%, ${opacity}` }
     : { backgroundColor: `hsl(0, 0%, 90%)` };
 
-  const borderColor = (index === selected) ? { borderColor: `hsla(0, 0%, 0%, 50%)` }
+  const borderColor = (index === selected) ? { border: `2pt solid hsla(0, 0%, 0%, 75%)` }
     : { borderColor: `hsla(0, 0%, 0%, 10%)` };
 
   return (
@@ -79,19 +79,19 @@ function EditForm({ values, setValue, selected, selectIndex }) {
         className="value-button"
         onClick={() => handleIncrement(selected)}
       >
-        INC
+        Increase
       </button>
       <button
         className="value-button"
         onClick={() => handleDecrement(selected)}
       >
-        DEC
+        Decrease
       </button>
       <button
         className="value-button"
         onClick={handleRandom}
       >
-        Random
+        Randomize
       </button>
       <button
         className="value-button"
