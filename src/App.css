@@ -39,19 +39,22 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 2rem;
+  margin-bottom: 2rem;
 }
 
-/* .content {
+.content {
   padding: 2rem;
   flex-direction: column;
-  justify-content: center;
-  align-items: center
-} */
+}
 
-.value-buttons {
+.value-button {
   height: 100%;
   width: 10%;
+}
+
+.heatmap-button {
+  height: 100%;
+  width: 20%;
 }
 
 /* @media screen and (max-width: 1080px) {

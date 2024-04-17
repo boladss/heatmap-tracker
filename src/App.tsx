@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 
-function Day({ index, input, max, selected }: { index: number, input: number, max: number, selected: number} ) {
+function Day({ index, input, max, selected, selectIndex }: { index: number, input: number, max: number, selected: number, selectIndex} ) {
   // const [value, setValue] = useState(0);
   
   // hsl(0, 100%, 1.57%)
@@ -16,11 +16,15 @@ function Day({ index, input, max, selected }: { index: number, input: number, ma
     : { borderColor: `hsla(0, 0%, 0%, 10%)` };
 
   return (
-    <div className="box" style={{...boxColor, ...borderColor}} />
-  )
+    <div
+      className="box"
+      style={{...boxColor, ...borderColor}}
+      onClick={() => {selectIndex(index)}}
+    />
+  );
 }
 
-function Timeline({ values, selected }: { values: number[], selected: number}) {
+function Timeline({ values, selected, selectIndex }: { values: number[], selected: number, selectIndex}) {
   const max: number = Math.max(...values);
 
   const timeline = Array(365).fill(0).map((_, i) =>
@@ -29,14 +33,11 @@ function Timeline({ values, selected }: { values: number[], selected: number}) {
       input={values[i]} 
       max={max}
       selected={selected}
+      selectIndex={selectIndex}
     />
   );
 
-  return (
-    <>
-      {timeline}
-    </>
-  )
+  return (<>{timeline}</>);
 }
 
 function EditForm({ values, setValue, selected, selectIndex }) {
@@ -75,25 +76,25 @@ function EditForm({ values, setValue, selected, selectIndex }) {
         placeholder="Input index here."
       />
       <button
-        className="value-buttons"
+        className="value-button"
         onClick={() => handleIncrement(selected)}
       >
         INC
       </button>
       <button
-        className="value-buttons"
+        className="value-button"
         onClick={() => handleDecrement(selected)}
       >
         DEC
       </button>
       <button
-        className="value-buttons"
+        className="value-button"
         onClick={handleRandom}
       >
         Random
       </button>
       <button
-        className="value-buttons"
+        className="value-button"
         onClick={handleClear}
       >
         Clear
@@ -102,14 +103,14 @@ function EditForm({ values, setValue, selected, selectIndex }) {
   )
 }
 
-function HeatMap() {
+function Heatmap() {
   const [values, setValue] = useState(Array(365).fill(0));
   const [selected, selectIndex] = useState(0); // selected index for highlighting
 
   return (
     <div className="heatmap-wrapper">
       <div className="heatmap-container">
-        <Timeline values={values} selected={selected}/>
+        <Timeline values={values} selected={selected} selectIndex={selectIndex}/>
       </div>
       <p>
         <EditForm
@@ -123,12 +124,35 @@ function HeatMap() {
   )
 }
 
+function Button({disabled, onClick, text}: { disabled: boolean, onClick, text: string}) {
+  return (<button className="heatmap-button" disabled={disabled} onClick={onClick}>{text}</button>)
+}
+
 function App() {
+  const [heatmaps, setHeatmaps] = useState([<Heatmap />]);
+  const [removeDisabled, setRemoveDisabled] = useState(true); // enable/disable remove button
+
+  function handleAddHeatmap() {
+    setHeatmaps(heatmaps => [...heatmaps, <Heatmap />]);
+    setRemoveDisabled(false);
+  }
+
+  function handleRemoveHeatmap() {
+    if (heatmaps.length > 1) {
+      if (heatmaps.length === 2) setRemoveDisabled(true);
+      const nextHeatmaps = heatmaps.slice();
+      nextHeatmaps.pop();
+      setHeatmaps(nextHeatmaps);
+    }
+  }
+
   return (
     <div className="content">
-      <HeatMap />
-      <HeatMap />
-      <HeatMap />
+      {heatmaps}
+      <div>
+        <button className="heatmap-button" onClick={handleAddHeatmap}>Add heatmap</button><br/>
+        <Button disabled={removeDisabled} onClick={handleRemoveHeatmap} text="Remove heatmap"/>
+      </div>
     </div>
   )
 }
