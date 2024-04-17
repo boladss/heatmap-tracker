@@ -1,11 +1,13 @@
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
   padding: 2rem;
   /* text-align: center; */
 
   --box-size: 10pt;
   --box-gap: 1.2pt;
+  /* --box-size: 10vw;
+  --box-gap: 0.1vw; */
   --box-color: green;
   --box-default-color: hsl(0, 0%, 90%);
   --border-color: hsla(0, 0%, 0%, 10%);
@@ -26,6 +28,7 @@
   float: left;
   flex-direction: column;
   flex-wrap: wrap;
+  align-self: flex-start;
   column-gap: 0;
   row-gap: 0;
   max-height: calc(7*(var(--box-size) + 2*var(--box-gap)));
@@ -34,6 +37,25 @@
 
 .heatmap-wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin: 2rem;
 }
+
+/* .content {
+  padding: 2rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center
+} */
+
+.value-buttons {
+  height: 100%;
+  width: 10%;
+}
+
+/* @media screen and (max-width: 1080px) {
+  body {
+    min-width: 75vw;
+  }
+} */
