@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 
-function Day({ index, input, max, selected, selectIndex }: { index: number, input: number, max: number, selected: number, selectIndex} ) {
+function Day({ index, input, max, selected, selectIndex }: { index: number, input: number, max: number, selected: number, selectIndex: (index: number) => void } ) {
   // const [value, setValue] = useState(0);
   
   // hsl(0, 100%, 1.57%)
@@ -24,7 +24,7 @@ function Day({ index, input, max, selected, selectIndex }: { index: number, inpu
   );
 }
 
-function Timeline({ values, selected, selectIndex }: { values: number[], selected: number, selectIndex}) {
+function Timeline({ values, selected, selectIndex }: { values: number[], selected: number, selectIndex: (index: number) => void }) {
   const max: number = Math.max(...values);
 
   const timeline = Array(365).fill(0).map((_, i) =>
@@ -40,7 +40,12 @@ function Timeline({ values, selected, selectIndex }: { values: number[], selecte
   return (<>{timeline}</>);
 }
 
-function EditForm({ values, setValue, selected, selectIndex }) {
+function EditForm({ values, setValue, selected, selectIndex } : 
+  { values: number[], 
+    setValue: (nextValues: number[]) => void, 
+    selected: number, 
+    selectIndex: (index: number) => void }) {
+      
   function handleIncrement(selected: number) {
     const nextValues = values.map((c: number, i: number) => {
       if (i === selected) return c + 1;
@@ -124,7 +129,7 @@ function Heatmap() {
   )
 }
 
-function Button({disabled, onClick, text}: { disabled: boolean, onClick, text: string}) {
+function Button({disabled, onClick, text}: { disabled: boolean, onClick: () => void, text: string}) {
   return (<button className="heatmap-button" disabled={disabled} onClick={onClick}>{text}</button>)
 }
 

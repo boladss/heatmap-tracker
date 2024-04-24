@@ -33,6 +33,7 @@
   row-gap: 0;
   max-height: calc(7*(var(--box-size) + 2*var(--box-gap)));
   min-width: calc(53*(var(--box-size) + 2*var(--box-gap)));
+  margin-bottom: 0.5rem;
 }
 
 .heatmap-wrapper {
